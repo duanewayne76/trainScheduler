@@ -22,30 +22,34 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 
+
+
 </head>
 
 <title>Train Time</title>
-<div class="container">
-    <div class="jumbotron">
 
-        <h1 class="text-center">Anytime is Train Time</h1>
-        <p class="text-center">Choo Choo Chee Chee</p>
-    </div>
+<body>
+    <div class="container">
+        <div class="jumbotron">
 
-    <div class="card">
+            <h1 class="text-center">Anytime is Train Time</h1>
+            <p class="text-center">Choo Choo Chee Chee</p>
+        </div>
 
-        <div class="card-header">Current Train Schedule</div>
-        <div class="card-body">
-            <table class="table table-lg table-hover" id="schedule-table">
-                <thead class="thead">
-                    <th scope="col">Train Name</th>
-                    <th scope="col">Destination</th>
-                    <th scope="col">Frequency (minutes)</th>
-                    <th scope="col">Next Arrival</th>
-                    <th scope="col">Minutes Away</th>
-                </thead>
-                <tbody>
-                    <!-- <tr>
+        <div class="card">
+
+            <div class="card-header">Current Train Schedule</div>
+            <div class="card-body">
+                <table class="table table-lg table-hover" id="schedule-table">
+                    <thead class="thead">
+                        <th scope="col">Train Name</th>
+                        <th scope="col">Destination</th>
+                        <th scope="col">Frequency (minutes)</th>
+                        <th scope="col">Next Arrival</th>
+                        <th scope="col">Minutes Away</th>
+                    </thead>
+                    <tbody>
+                        <!-- <tr>
                         <th id=trainName>Trinton Express</th>
                         <td id=trainDestination>Washington, D.C.</td>
                         <td id=frequencyMinutes>120</td>
@@ -53,58 +57,58 @@
                         <td id=minutesAway>20</td>
 
                     </tr> -->
-                    <tr>
-                        <th scope="row">American Express</th>
-                        <td>Virginia Beach, VA</td>
-                        <td>60</td>
-                        <td>5:00 PM</td>
-                        <td>30</td>
+                        <!-- <tr>
+                            <th scope="row">American Express</th>
+                            <td>Virginia Beach, VA</td>
+                            <td>60</td>
+                            <td>5:00 PM</td>
+                            <td>30</td>
 
-                    </tr>
-                </tbody>
+                        </tr> -->
+                    </tbody>
 
+            </div>
+            </table>
         </div>
-        </table>
     </div>
-</div>
 
-<br>
-<br>
-<!-- Add Trains -->
-<div class="card">
+    <br>
+    <br>
+    <!-- Add Trains -->
+    <div class="card">
 
-    <div class="card-header">Add Train</div>
-    <form>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="newName">Train Name</label>
-                <input type="text" class="form-control" id="newName">
+        <div class="card-header">Add Train</div>
+        <form>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="newName">Train Name</label>
+                    <input type="text" class="form-control" id="newName">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="newDestination">Destination</label>
+                    <input type="text" class="form-control" id="newDestination">
+                </div>
             </div>
-            <div class="form-group col-md-6">
-                <label for="newDestination">Destination</label>
-                <input type="text" class="form-control" id="newDestination">
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="newTime">First Train Time</label>
-                <input type="text" class="form-control" id="newTime" placeholder="HH:mm (military time)">
-                <br>
-                <button type="submit" class="btn btn-primary">Submit</button>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="newTime">First Train Time</label>
+                    <input type="time" class="form-control" id="newTime" placeholder="HH:mm (military time)">
+                    <br>
+                    <button id="s" type="submit" class="btn btn-primary">Submit</button>
 
-            </div>
-            <div class="form-group col-md-6">
-                <label for="newFrequency">Frequency</label>
-                <input type="text" class="form-control" id="newFrequency" placeholder="Minutes">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="newFrequency">Frequency</label>
+                    <input type="number" class="form-control" id="newFrequency" placeholder="Minutes">
 
 
-            </div>
+                </div>
 
 
 
 
-    </form>
-</div>
+        </form>
+    </div>
 
 
 
@@ -113,7 +117,36 @@
 
 
 
-<body>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-database.js"></script>
+    
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+
+    <!-- <script>
+        $(document).ready(function () {
+
+
+            // Your web app's Firebase configuration
+            var firebaseConfig = {
+                apiKey: "AIzaSyDVDNY6tIIFJtYILw_fIhrQ6GyHsepMx_c",
+                authDomain: "traintime-e5269.firebaseapp.com",
+                databaseURL: "https://traintime-e5269.firebaseio.com",
+                projectId: "traintime-e5269",
+                storageBucket: "traintime-e5269.appspot.com",
+                messagingSenderId: "186117666666",
+                appId: "1:186117666666:web:fbf9da78e3db5dae"
+            };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+            var database = firebase.database()
+        })
+    </script> -->
+
     <!-- Optional JavaScript -->
     <script src="app.js"></script>
 </body>
