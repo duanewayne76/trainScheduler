@@ -32,19 +32,28 @@ $(document).ready(function () {
 
         event.preventDefault();
 
+        // Add a Train
         var name = $('#newName').val().trim();
         var destination = $('#newDestination').val().trim();
         var time = $('#newTime').val().trim();
         var frequency = $('#newFrequency').val().trim();
+        var minutesAway = moment().subtract(time).format ("hh:mm");
+        var currentTime = moment();
 
         var addedTrain = {
             name: name,
             destination: destination,
-            time: time,
             frequency: frequency,
+            time: time,
+            minutesAway: minutesAway
+
         }
         console.log(addedTrain);
         database.ref().push(addedTrain);
+        console.log(currentTime);
+        //var minutesAway = moment().subtract(time).format ("hh:mm");
+        //var nextTrain = moment().add(frequency).format ("hh:mm");
+        //console.log(minutesAway);
 
 
 
@@ -58,7 +67,7 @@ $(document).ready(function () {
         console.log(childSnapshot.val().frequency);
 
         var x = $('<tr>');
-        x.html(`<th scope="row">${childSnapshot.val().name}</th><td>${childSnapshot.val().destination}</td><td>${childSnapshot.val().frequency}</td><td>${childSnapshot.val().time}</td>`);
+        x.html(`<th scope="row">${childSnapshot.val().name}</th><td>${childSnapshot.val().destination}</td><td>${childSnapshot.val().frequency}</td><td>${childSnapshot.val().time}</td><td>${childSnapshot.val().minutesAway}</td></td>`);
         $('#schedule-table').append(x);
 
         // Handle the errors
